@@ -1,6 +1,21 @@
 
-import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, LOGOUT, RESET_USER_INFO} from './mutation-types'
-import {reqAddress, reqFoodCatetorys, reqShops, reqLogout, reqUserInfo} from '../api'
+import {RECEIVE_ADDRESS,
+  RECEIVE_CATEGORYS,
+  RECEIVE_SHOPS,
+  RECEIVE_USER_INFO,
+  LOGOUT,
+  RESET_USER_INFO,
+  RECEIVE_SHOP_GOODS,
+  RECEIVE_SHOP_COMMENT,
+  RECEIVE_SHOP_INFO} from './mutation-types'
+import {reqAddress,
+  reqFoodCatetorys,
+  reqShops,
+  reqLogout,
+  reqUserInfo,
+  reqShopGoods,
+  reqShopComment,
+  reqShopInfo} from '../api'
 
 export default {
   async getAddress ({commit, state}) {
@@ -46,6 +61,30 @@ export default {
     if(result.code === 0) {
       const userInfo = result.data
       commit(RESET_USER_INFO, {userInfo})
+    }
+  },
+
+  async getShopInfo({commit}) {
+    const result = await reqShopInfo()
+    if(result.code === 0) {
+      const shopInfo = result.data
+      commit(RECEIVE_SHOP_INFO, {shopInfo})
+    }
+  },
+
+  async getShopGoods({commit}) {
+    const result = await reqShopGoods()
+    if(result.code === 0) {
+      const shopGoods = result.data
+      commit(RECEIVE_SHOP_GOODS, {shopGoods})
+    }
+  },
+
+  async getShopComment({commit}) {
+    const result = await reqShopComment()
+    if(result.code === 0) {
+      const shopComment = result.data
+      commit(RECEIVE_SHOP_COMMENT, {shopComment})
     }
   }
 }

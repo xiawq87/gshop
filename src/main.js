@@ -6,7 +6,19 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import VueLazyload from 'vue-lazyload'
+import './filter'
+
+import './mock/mockServer'
+
+import loading from './common/imgs/loading.gif'
+
 Vue.component(Button.name, Button)
+
+Vue.use(VueLazyload, {
+  loading
+})
+
 
 Vue.config.productionTip = false
 
